@@ -121,7 +121,25 @@ int main(int argc, char* argv[]) {
 		cv::HoughCircles(imgThresh,circles, cv::HOUGH_GRADIENT, hough_sub_sampling, min_dist, canny_max, canny_min);
 
 		if (!circles.empty()) {
-			cv::Vec3f set_of_circles = circles[0];
+			int n_circles = circles.size();
+			int n_params_per_circle = 3;
+			int max_circles = n_circles;
+			if (max_circles > MAX_CIRCLES_TO_DRAW) {
+				max_circles = MAX_CIRCLES_TO_DRAW;
+			}
+			for (int i = 0; i < max_circles; i++) {
+				cv::Vec3f circle = circles.at(i);
+				float x = circle[0];
+				float y = circle[1];
+				float radius = circle[2];
+
+				if (radius <= max_radius) {
+					printf("ball position x = %f , y = %f , radius = %f", x, y, radius);
+					cv::circle(imgOriginal, cv::Point(x, y), 4, cv::Scalar(0, 255, 128), -1);
+					cv::circle(imgOriginal, cv::Point(x, y), radius, cv::Scalar(255, 0, 255), 5);
+					cv::circle(imgThresh, cv::Point(x, y), radius, cv::Scalar(255, 255, 64), 3);
+				}
+			}
 			//Stuck at line 183 in the python code
 		}
 
