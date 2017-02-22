@@ -1,13 +1,14 @@
-#include<opencv2\imgproc\imgproc.hpp>
-#include<opencv2\highgui\highgui.hpp>
-#include<iostream>
+#include <opencv2\imgproc\imgproc.hpp>
+#include <opencv2\highgui\highgui.hpp>
+#include <iostream>
+#include <time.h>
 
-int DEF_lH = 15;
-int DEF_uH = 35;
-int DEF_lS = 120;
-int DEF_uS = 250;
-int DEF_lV = 150;
-int DEF_uV = 255;
+int DEF_lH = 46;
+int DEF_uH = 98;
+int DEF_lS = 88;
+int DEF_uS = 174;
+int DEF_lV = 56;
+int DEF_uV = 193;
 
 using namespace std;
 
@@ -68,7 +69,14 @@ int main(int argc, char* argv[]) {
 	cv::Mat bImMidValue;
 	cv::Mat imgThresh;
 	cv::Mat lowerb, upperb;
+
+	int frameCount = 0;
+	int startTime = time(nullptr);
+
 	while (cv::waitKey(1) != ESC_KEY && capWebcam.isOpened()) {
+
+		frameCount++;
+
 		if (!capWebcam.read(imgOriginal)) {
 			cerr << "error: frame not read from webcam" << endl;
 			cin.ignore();
@@ -134,16 +142,17 @@ int main(int argc, char* argv[]) {
 				float radius = circle[2];
 
 				if (radius <= max_radius) {
-					printf("ball position x = %f , y = %f , radius = %f", x, y, radius);
+					int timeDiff = time(nullptr) - startTime;
+					int fps = (float)frameCount / (float)timeDiff;
+					printf("ball position x = %f , y = %f , radius = %f, fps = %f\n", x, y, radius, fps);
 					cv::circle(imgOriginal, cv::Point(x, y), 4, cv::Scalar(0, 255, 128), -1);
 					cv::circle(imgOriginal, cv::Point(x, y), radius, cv::Scalar(255, 0, 255), 5);
 					cv::circle(imgThresh, cv::Point(x, y), radius, cv::Scalar(255, 255, 64), 3);
 				}
 			}
-			//Stuck at line 183 in the python code
+
 		}
 
-		//Picked up at line 211
 		cv::imshow("imgOriginal", imgOriginal);
 
 		if (tbk_method) {
