@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 	if (!capWebcam.isOpened()) {
 		cerr << "error: capWebcam not access successfully" << endl;
 		cin.ignore();
-		return;
+		return -1;
 	}
 
 	cv::namedWindow("imgOriginal", cv::WINDOW_AUTOSIZE);
@@ -99,11 +99,9 @@ int main(int argc, char* argv[]) {
 
 		}
 		else {
-			int lSizes[] = { lH,lS,lV };
-			int uSizes[] = { uH,uS,uV };
-			lowerb = cv::Mat(3, lSizes, CV_8UC3);
-			upperb = cv::Mat(3, uSizes, CV_8UC3);
-			cv::inRange(imgHSV, lowerb, upperb, imgThresh);
+			vector<int> lSizes = { lH,lS,lV };
+			vector<int> uSizes = { uH,uS,uV };
+			cv::inRange(imgHSV, lSizes, uSizes, imgThresh);
 		}
 
 		cv::dilate(imgThresh, imgThresh, cv::Mat::ones(7, 7, CV_8UC1));
@@ -122,7 +120,7 @@ int main(int argc, char* argv[]) {
 		vector<cv::Vec3f> circles;
 		cv::HoughCircles(imgThresh,circles, cv::HOUGH_GRADIENT, hough_sub_sampling, min_dist, canny_max, canny_min);
 
-		if (!circles.empty) {
+		if (!circles.empty()) {
 			cv::Vec3f set_of_circles = circles[0];
 			//Stuck at line 183 in the python code
 		}
