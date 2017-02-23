@@ -17,6 +17,11 @@ seconds since the program started.  This is displayed along with
 the data of the tracked ball in the console output.
 
 3)
+The hardest part about the python code is that it was not properly
+indented. Luckily you had commented in where methods ended which made
+it a lot easier to figure out. It would have been a lot easier to understand
+if the python code had proper indentation since there are no symbols
+that indicate start and ends of program flow in python.
 
 4)
 Jeff - I didn't have a problem with the code itself, but I did run
@@ -25,7 +30,11 @@ by OpenCV and with getting the Python version of the program to run
 (There were some difficulties with getting the correct version of
 numpy)
 
-Mychal - 
+Mychal - The tough part about the conversion was that python doesn't 
+have types, and that python opencv methods return values, whereas c++
+opencv methods are all void and you pass in the destination object.
+Luckily VS made that slightly easier since it tells you all the method
+signatures so figuring out what datatypes you need was a bit clearer.
 
 5)
 We planned on equally doing the conversion, but since Jeff had some
@@ -37,6 +46,9 @@ worked properly, and also added the FPS counters for speed testing.
 We used Git to share the code, so there were no problems.
 
 7)
+One thing you could do to make it more appealing to kids is putting
+a cool image where the circles are. This could be something like a smiley
+face or something along those lines that little kids like.
 
 8)
 No, I would not change the code at all.  The code works well enough
