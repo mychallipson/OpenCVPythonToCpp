@@ -1,0 +1,66 @@
+Mychal Lipson
+Jeff Bauer
+
+Homework 5 Writeup
+
+1)
+After implementing the Python code in C++, we added an FPS tracker
+that displays the rate at which frames are processed.  In Python,
+the program was reporting that it was running at 15 FPS, whereas
+the C++ program reported that it was running at 48 FPS.  This is
+a very noticeable speedup for the C++ version.
+
+2)
+Timing was done by counting the number of cycles that the program
+has gone through since it started and divided by the number of 
+seconds since the program started.  This is displayed along with
+the data of the tracked ball in the console output.
+
+3)
+
+4)
+Jeff - I didn't have a problem with the code itself, but I did run
+into a lot of issues with both getting my camera to be recognized
+by OpenCV and with getting the Python version of the program to run
+(There were some difficulties with getting the correct version of
+numpy)
+
+Mychal - 
+
+5)
+We planned on equally doing the conversion, but since Jeff had some
+problems with his camera, Mychal wrote most of the conversion.
+Jeff worked on some of the code conersion, testing that the code 
+worked properly, and also added the FPS counters for speed testing.
+
+6)
+We used Git to share the code, so there were no problems.
+
+7)
+
+8)
+No, I would not change the code at all.  The code works well enough
+for its purpose, and adding anything to better track the ball would
+most likely slow the program down.
+
+9)
+It's always nice to test the program from time to time and record
+the results to see the differences between changes.  Particularly,
+if we were attempting to make changes that were meant to either
+improve the speed or accuracy of the program, it would be wise to
+record how well the program operates before making the changes so
+that results can be compared between the two.  Since we used source
+control, testing older version would not be a problem for us.
+
+10)
+I would change the program to try using data from previous frames
+to help it find balls in further frames.  Based on the settings of
+the sliders, the detector could be tracking a ball in one frame, but
+then immediately think that the ball is not there the next frame.
+Instead, it would be nice if the program knew that there was a ball
+in some position in one frame, then the ball is probably near that
+location in the next frame, so it can loosen its constraints to so
+that it does not lose the ball immediately.
+
+11)
+No
